@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>PhoneGap</title>
+  	<script type="text/javascript" charset="utf-8" src="phonegap-1.2.0.js"></script>      
+  	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0rc3/jquery.mobile-1.0rc3.min.css" />
+  	<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+  	<script type="text/javascript" src="http://code.jquery.com/mobile/1.0rc3/jquery.mobile-1.0rc3.min.js"></script>
+  	<script type="text/javascript" charset="utf-8">
+    	function onLoad(){
+        document.addEventListener("deviceready", onDeviceReady, true);
+     	}
+     	function onDeviceReady(){
+        $.getJSON('http://gentle-sword-4419.herokuapp.com/categories.json', function(data) {
+		  var new_content = '';
+		  //alert ('in json event');
+          $.each(data, function(key, val) {
+          	if ("category_name" in val) {
+          	  new_content = new_content + '<li>' + val["category_name"] + '</li>';
+          	  //alert (new_content);
+          	};
+          });
+          if (new_content != '') {
+        	// alert("found new_content");
+        	$('span#loading').remove();
+        	$('p#main_content').listview();
+			$('p#main_content').append(new_content);
+			$('p#main_content').listview('refresh');
+          };
+        });
+     	};
+  	</script>
+  	</head>
+  	<body onLoad="onLoad();">
+      <div data-role="page">
+      	<div data-role="header">
+      		<h1>CatList Mobile</h1>
+      	</div><!-- /header -->
+
+      	<div data-role="content">	
+          <p id="main_content">
+            <span id="loading">Loading...</span>
+          </p>
+          
+      	</div><!-- /content -->
+
+      	<div data-role="footer">
+      		<h4>&copy;EBR Design, 2011</h4>
+      	</div><!-- /footer -->
+
+      </div><!-- /page -->
+
+      </body>
+</html>
