@@ -20,12 +20,12 @@
      	};
      	function loadJson() {
      	  $.mobile.showPageLoadingMsg();
-     	  $.getJSON('http://gentle-sword-4419.herokuapp.com/categories.json', function(data) {
+     	  $.getJSON('http://basecamp.blueridgeoutdoors.com/mobile-basecamp/Application/json.php', function(data) {
     		var new_content = '';
 			//alert ('in json event');
-            $.each(data, function(key, val) {
-              if ("category_name" in val) {
-                new_content = new_content + '<li>' + val["category_name"] + ' (' + val["category_type"] + ')</li>';
+            $.each(data.markers1, function(key, val) {
+              if ("post_type" in val) {
+                new_content = new_content + '<li>' + val["post_type"] + ' (' + val["post_type"] + ')</li>';
               	//alert (new_content);
               };
             });
